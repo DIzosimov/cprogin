@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 	//SDL_Delay(5000);
 
 	// Paths to resources
-	
+	/*
 	std::string imagePath = "../../images/";
 	std::string fontPath = "../../fonts/";
 	std::string soundPath = "../../sounds/";
@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
 	SDL_Quit();
 	
 	return EXIT_SUCCESS;
-	
+	*/
 
-     //return 0;
+     return 0;
 }

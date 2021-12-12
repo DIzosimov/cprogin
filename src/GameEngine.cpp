@@ -34,6 +34,9 @@ namespace cwing {
             
 				} // switch
 			} // inre while
+              for (Component* c : comps)
+				    c->tick();
+
 			SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
 			SDL_RenderClear(sys.get_ren());
 			for (Component* c : comps)
