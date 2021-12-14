@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <Paddle.h>
+#include <GameEngine.h>
 
 // Alla dessa SDL inkluderingsfiler används inte i detta testprogram.
 // Bifogas endast för test av SDL installation! 
@@ -11,13 +13,15 @@
 
 //#define FPS 60
 
+using namespace cwing;
+
 
 int main(int argc, char* argv[]) {
 
-	//SDL_Delay(5000);
+	//SDL_Delay(10000);
 
 	// Paths to resources
-	/*
+	
 	std::string imagePath = "../../images/";
 	std::string fontPath = "../../fonts/";
 	std::string soundPath = "../../sounds/";
@@ -37,10 +41,39 @@ int main(int argc, char* argv[]) {
 	SDL_Window* window 		= SDL_CreateWindow("Window", 100, 100, 800, 600, 0);
 	SDL_Renderer* renderer 	= SDL_CreateRenderer(window, -1, 0);
 
-	SDL_Surface* bg_sur = IMG_Load( (imagePath + "bg.jpg").c_str() );
+
+	SDL_Surface* bg_sur = IMG_Load( (imagePath + "background.jpg").c_str() );
+
+ 
+
+    SDL_Surface* block01_sur = IMG_Load( (imagePath + "block01.png").c_str() );
+
+    SDL_Surface* ball_sur = IMG_Load( (imagePath + "ball.png").c_str() );
 
 	SDL_Texture* bg_tex = SDL_CreateTextureFromSurface(renderer, bg_sur);
 	SDL_FreeSurface(bg_sur);
+
+   
+
+	
+
+
+	SDL_Texture* ball_tex  = SDL_CreateTextureFromSurface(renderer, ball_sur);
+	SDL_Rect ballRect = {390, 540, ball_sur->w, ball_sur->h};
+	SDL_FreeSurface(ball_sur);
+
+	SDL_Texture* block01_tex  = SDL_CreateTextureFromSurface(renderer, block01_sur);
+	SDL_Rect block01Rect = {100, 100, block01_sur->w, block01_sur->h};
+	SDL_FreeSurface(block01_sur);
+
+//Paddle* p = Paddle::getInstance(350, 350, 80, 20);
+
+    GameEngine ses;
+	Paddle* p = Paddle::getInstance(350, 350, 80, 20);
+	ses.add(p);
+	
+
+
 
 	std::cout << "Avsluta programmet genom \"quit\" från fönstrets meny eller genom att stänga fönstret!" << std::endl;
 
@@ -56,6 +89,9 @@ int main(int argc, char* argv[]) {
 
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, bg_tex, NULL, NULL);
+		//SDL_RenderCopy(renderer, p.draw, NULL, &p);
+		SDL_RenderCopy(renderer, ball_tex, NULL, &ballRect);
+		SDL_RenderCopy(renderer, block01_tex, NULL, &block01Rect);
 		SDL_RenderPresent(renderer);
 	}
 
@@ -69,7 +105,7 @@ int main(int argc, char* argv[]) {
 	SDL_Quit();
 	
 	return EXIT_SUCCESS;
-	*/
+	
 
      return 0;
 }

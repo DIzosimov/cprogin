@@ -14,6 +14,8 @@ namespace cwing {
         private:
         SDL_Window* win;
         SDL_Renderer* ren;
+        
+        SDL_Texture* bg_sur;
     };
 
     extern System sys;

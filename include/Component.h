@@ -18,7 +18,7 @@ namespace cwing {
         virtual void keyRight(const SDL_Event&) {}
         virtual void keyLeft(const SDL_Event&) {}
 		virtual void draw() const = 0;
-	    virtual void tick() = 0;
+	    //virtual void tick() = 0;
 		const SDL_Rect& getRect() const { return rect; }
 
 	protected:
