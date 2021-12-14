@@ -14,7 +14,7 @@ namespace cwing {
         private:
         SDL_Window* win;
         SDL_Renderer* ren;
-        
+        void draw() const;
         SDL_Texture* bg_sur;
     };
 

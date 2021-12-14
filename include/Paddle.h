@@ -12,8 +12,8 @@ class Paddle : public Component
 public:
 
     static Paddle* getInstance(int x, int y, int w, int h);
-	void setParams(int w) { width = w; };
-	SDL_Rect paddleRect() { return { paddleX, paddleY, 80, 20 }; };
+	//void setParams(int w) { width = w; };
+	//SDL_Rect paddleRect() { return { paddleX, paddleY, 80, 20 }; };
 	void setPaddlePositions(int w, int h);
 	int getPaddleX() { return paddleX; }
 	int getPaddleY() { return paddleY; }

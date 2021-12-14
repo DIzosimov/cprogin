@@ -6,15 +6,15 @@
 using namespace cwing;
 
 
+
+
 void GameEngine::add(Component* c)
 {
 	comps.push_back(c);
 }
 
-GameEngine::~GameEngine()
-	{
-	}
-/*
+
+
 
 	void GameEngine::run() {
 	bool quit = false;
@@ -25,29 +25,27 @@ GameEngine::~GameEngine()
 			case SDL_QUIT: quit = true; break;
 			case SDL_MOUSEBUTTONDOWN:
 				for (Component* c : comps)
-					c->mouseDown(event.button.x, event.button.y);
+					c->mouseDown(event);
 				break;
 			case SDL_MOUSEBUTTONUP:
 				for (Component* c : comps)
-					c->mouseUp(event.button.x, event.button.y);
+					c->mouseUp(event);
 				break;
 			} //switch
 		} //inre while
 
-		SDL_SetRenderDrawColor(sys.ren, 255, 255, 255, 255);
-		SDL_RenderClear(sys.ren);
+		SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
+		SDL_RenderClear(sys.get_ren());
 		for (Component* c : comps)
 			c->draw();
-		//SDL_RenderPresent(sys.ren);
+		SDL_RenderPresent(sys.get_ren());
 
 	} // yttre while
 }
-GameEngine::~GameEngine()
-	{
-	}
 
 
 
+/*
 	void GameEngine::run() {
 		bool quit = false;
 		bool drag = false;
