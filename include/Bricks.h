@@ -20,7 +20,7 @@ public:
     //bool isHit() { return isBrickHit; };
     void hit();
     void draw() const;
-    //void tick();
+    void tick() {};
     //Brick();
 	//Brick( int verticalSpacing, int horizontalSpacing, int life );
     ~Bricks();

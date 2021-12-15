@@ -13,7 +13,7 @@ public:
 
     static Background* getInstance(int x, int y, int w, int h);
     void draw() const;
-    //void tick();
+    void tick() {};
     ~Background();
 protected:
 		Background(int x, int y, int w, int h);

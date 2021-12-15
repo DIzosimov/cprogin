@@ -13,7 +13,7 @@ public:
 
     static Ball* getInstance(int x, int y, int w, int h);
     void draw() const;
-    //void tick();
+    void tick() {};
     ~Ball();
 protected:
 		Ball(int x, int y, int w, int h);
