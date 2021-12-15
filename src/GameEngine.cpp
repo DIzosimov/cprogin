@@ -30,13 +30,19 @@ void GameEngine::run() {
 			case SDL_QUIT: quit = true; break;
 			case SDL_MOUSEBUTTONDOWN:
 				for (Component* c : comps)
-					c->mouseDown(event);    //(event.button.x, event.button.y);
+					c->mouseDown(event);
 				break;
 			case SDL_MOUSEBUTTONUP:
 				for (Component* c : comps)
 					c->mouseUp(event);   //(event.button.x, event.button.y);
 				break;
-			} //switch
+			
+			case SDL_MOUSEMOTION:
+			    for(Component* c : comps)
+				c->mouseMotion(event);   //(event.button.x, event.button.y);
+				break;
+			}
+			//switch
 		} //inre while
 
 		for (Component* c : comps)

@@ -10,6 +10,7 @@ namespace cwing {
 	public:
 		virtual ~Component();
 		virtual void mouseDown(const SDL_Event&) {}
+		virtual void mouseMotion (const SDL_Event&) {}   
 		virtual void mouseUp(const SDL_Event&) {}
         virtual void mouseRight(const SDL_Event&) {}
         virtual void mouseLeft(const SDL_Event&) {}

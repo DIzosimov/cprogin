@@ -3,6 +3,7 @@
 #include <SDL_image.h> 
 #include <System.h>
 #include <Component.h>
+#include <iostream>
 
 //std::string imagePath = "../../images/";
 
@@ -10,8 +11,11 @@ namespace cwing{
  //"c:/images/
     Paddle::Paddle(int x, int y, int w, int h):Component(x,y,w,h)
     {
+    //SDL_Surface* paddle_sur = IMG_Load( (imagePath + "paddle.png").c_str() );
 	paddle_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/paddle.png");
-
+    //paddle_tex  = SDL_CreateTextureFromSurface(sys.get_ren(), paddle_sur);
+	//SDL_Rect paddleRect = {350, 550, paddle_sur->w, paddle_sur->h};
+	/////SDL_FreeSurface(paddle_sur);
     }
 
 
@@ -31,11 +35,10 @@ SDL_DestroyTexture(paddle_tex);
 
 
 void Paddle::tick(){
-	if (rect.x > 0)
-		rect.x -= paddleSpeed;
+	if (drag)
+		moveLeft();
 	else 
-	   if(rect.x <= width - 90)
-		rect.x += paddleSpeed;
+	   moveRight();
 
 }
 
@@ -45,6 +48,17 @@ void Paddle::mouseDown(const SDL_Event& eve)
 SDL_Point p = {eve.button.x, eve.button.y};
 	if(SDL_PointInRect(&p, &getRect()))
 	drag = true;
+ }
+ void Paddle::mouseMotion(const SDL_Event& eve)
+ {
+	 if(drag){ 
+		 std::cout<< "hej"<< std::endl;
+	 rect.x += eve.motion.xrel;
+	 //re += eve.motion.yrel; 
+	 }
+	
+
+
  }
 
 void Paddle::draw() const
@@ -60,4 +74,15 @@ void Paddle::setPaddlePositions(int w, int h)
 	paddleY = h - 40;
 }
 
+void Paddle::moveLeft()
+{
+	if (getPaddleX() > 0)
+		paddleX -= paddleSpeed;
+}
+
+void Paddle::moveRight()
+{
+	if (getPaddleX() <= width - 90)
+		paddleX += paddleSpeed;
+}
 }
