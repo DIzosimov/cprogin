@@ -41,12 +41,22 @@ void GameEngine::run() {
 			    for(Component* c : comps)
 				c->mouseMotion(event);   //(event.button.x, event.button.y);
 				break;
+			
+			case SDL_KEYDOWN:
+				for (Component* c : comps)
+					c->keyDown(event); 
+					break;
 			}
+		
 			//switch
 		} //inre while
 
 		for (Component* c : comps)
 			c->tick();
+
+			for(Component* c : comps)
+			if(c-> gameOver())
+			  quit = true;
 
 		for (Component* c : added)
 			comps.push_back(c);

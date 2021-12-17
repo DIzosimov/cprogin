@@ -7,6 +7,7 @@
 #include "Bricks.h"
 
 
+
 // Alla dessa SDL inkluderingsfiler används inte i detta testprogram.
 // Bifogas endast för test av SDL installation! 
 
@@ -24,12 +25,19 @@ int main(int argc, char* argv[]) {
 	cwing::GameEngine ses;
 	Background* b = Background::getInstance(0, 0, 800, 600);
 	ses.add(b);
-	Paddle* p = Paddle::getInstance(350, 550, 80, 20);
+	Paddle* p = Paddle::getInstance(330, 590, 100, 10);
 	ses.add(p);
-	Ball* g = Ball::getInstance(385, 540, 13, 13);
+	Ball* g = Ball::getInstance(0, 0, 13, 13, p);
 	ses.add(g);
-	Bricks* t = Bricks::getInstance(100, 100, 60, 20);
-	ses.add(t);
+	
+
+	for (int i = 1; i <= 18; i++) {
+        for (int j = 1; j <= 10; j++) {
+            Bricks* t = Bricks::getInstance(i*40, j*20, 48, 20);
+				ses.add(t);
+        }
+	
+    }
 	ses.run();
 
 	

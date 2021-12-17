@@ -30,6 +30,7 @@ protected:
 private:
 	std::vector<Bricks> brickVector;
     SDL_Texture* bricks_tex ;
+	
     //bool isBrickHit = false;
 	//int brickWidth = 80;
 	//int brickHeight = 34;

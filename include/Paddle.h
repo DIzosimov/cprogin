@@ -5,6 +5,7 @@
 #include <SDL.h>
 
 
+
 namespace cwing{ 
 
 class Paddle : public Component 
@@ -24,8 +25,10 @@ public:
     void draw() const;
     void tick();
     ~Paddle();
+	void mouseUp(const SDL_Event&);
 protected:
 		Paddle(int x, int y, int w, int h);
+	
 
 private:
 	int width;

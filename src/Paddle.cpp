@@ -4,22 +4,17 @@
 #include <System.h>
 #include <Component.h>
 #include <iostream>
+#include "Ball.h"
 
-//std::string imagePath = "../../images/";
+
 
 namespace cwing{ 
- //"c:/images/
+
     Paddle::Paddle(int x, int y, int w, int h):Component(x,y,w,h)
     {
-    //SDL_Surface* paddle_sur = IMG_Load( (imagePath + "paddle.png").c_str() );
 	paddle_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/paddle.png");
-    //paddle_tex  = SDL_CreateTextureFromSurface(sys.get_ren(), paddle_sur);
-	//SDL_Rect paddleRect = {350, 550, paddle_sur->w, paddle_sur->h};
-	/////SDL_FreeSurface(paddle_sur);
+    
     }
-
-
-
 
 
 
@@ -35,9 +30,9 @@ SDL_DestroyTexture(paddle_tex);
 
 
 void Paddle::tick(){
-	if (drag)
+	if (drag) {
 		moveLeft();
-	else 
+	} else 
 	   moveRight();
 
 }
@@ -45,34 +40,34 @@ void Paddle::tick(){
 
 void Paddle::mouseDown(const SDL_Event& eve)
 {
+	
 SDL_Point p = {eve.button.x, eve.button.y};
-	if(SDL_PointInRect(&p, &getRect()))
-	drag = true;
+	if(SDL_PointInRect(&p, &getRect())) {
+		drag = true;
+	}
  }
+  void Paddle::mouseUp(const SDL_Event& eve)
+ {
+	 SDL_Point g = {eve.button.x, eve.button.y};
+	if(SDL_PointInRect(&g, &getRect())) {
+		drag = false;
+	}
+
+ }
+
  void Paddle::mouseMotion(const SDL_Event& eve)
  {
 	 if(drag){ 
-		 std::cout<< "hej"<< std::endl;
 	 rect.x += eve.motion.xrel;
-	 //re += eve.motion.yrel; 
 	 }
-	
-
-
  }
 
 void Paddle::draw() const
 {
-   // if(drag)
+
    SDL_RenderCopy(sys.get_ren(), paddle_tex, NULL, &getRect());
 }
     
-
-void Paddle::setPaddlePositions(int w, int h)
-{
-	paddleX = (w / 2) - 40;
-	paddleY = h - 40;
-}
 
 void Paddle::moveLeft()
 {

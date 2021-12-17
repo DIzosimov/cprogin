@@ -11,8 +11,24 @@ namespace cwing{
     Bricks::Bricks(int x, int y, int w, int h):Component(x,y,w,h)
     {
 
-    bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block02.png");
-    
+	int randNum = rand()%(5-1 + 1) + 1;
+            switch(randNum) {
+                case 1: 
+                    bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block01.png");
+                    break;
+                case 2:
+                    bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block02.png");
+                    break;
+                case 3:
+                    bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block03.png");
+                    break;
+                case 4:
+                    bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block04.png");
+                    break;
+                default:
+                    bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block01.png");
+                    break;            
+            }
     }
 
 
