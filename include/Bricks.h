@@ -20,10 +20,12 @@ public:
     //bool isHit() { return isBrickHit; };
     void hit();
     void draw() const;
-    void tick() {};
+    void tick(){}
     //Brick();
 	//Brick( int verticalSpacing, int horizontalSpacing, int life );
     ~Bricks();
+		int size() { return brickVector.size(); }
+		// std::vector<Bricks> getBricks() { return brickVector; }
 protected:
 		Bricks(int x, int y, int w, int h);
 
@@ -31,11 +33,11 @@ private:
 	std::vector<Bricks> brickVector;
     SDL_Texture* bricks_tex ;
 	
-    //bool isBrickHit = false;
+  bool isBrickHit = false;
 	//int brickWidth = 80;
 	//int brickHeight = 34;
-	//int currentHealth;
-	//int maxHealth;
+	int currentHealth;
+	int maxHealth;
 };
 }
 #endif

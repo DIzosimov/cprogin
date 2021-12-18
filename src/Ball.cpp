@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h> 
 #include <System.h>
+#include <SDL_rect.h>
 
 
 
@@ -12,6 +13,7 @@ namespace cwing{
     Ball::Ball(int x, int y, int w, int h, Paddle* paddle):Component(x,y,w,h)
     {
 		this->paddle = paddle;
+		
 
     ball_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/ball.png");
     
@@ -39,7 +41,18 @@ void Ball::draw() const
 
 void Ball::tick()
 {
+	rect.y += verticalVelocity ;
+	rect.x += horizontalVelocity;
+
 	if(gameStarted == true){ 
+	
+	
+		if(IntersectRect(this->rect, paddle->getRect()))
+		{
+		
+			changeVerticalVelocity();
+			std::cout << "Hej då!"<< std::endl;
+		}
     	
 		if (rect.x >= boundX || rect.x   <= 0)
 		{
@@ -54,15 +67,28 @@ void Ball::tick()
 		{
 			outOfBounds = true;
 		}
-		rect.y += verticalVelocity ;
-		rect.x += horizontalVelocity;
+		
 	} else {
 		rect.x = paddle->getRect().x;
 		rect.y = paddle->getRect().y;
 	}
-	
-
 }
+
+
+
+	bool Ball::IntersectRect(const SDL_Rect & r1, const SDL_Rect & r2)
+    {
+  if (!(r2.x > (r1.x + r1.w) || 
+           (r2.x + r2.w) < r1.x || 
+           r2.y > (r1.y + r1.h) ||
+           (r2.y + r2.h) < r1.y))
+		   {
+             return true;
+		   }
+		  return false;
+            
+    }
+	
 
 
 
@@ -100,18 +126,5 @@ SDL_Point p = {eve.button.x, eve.button.y};
 	 }
  }
 
- 
-/*
- void Ball::collision(Paddle& paddle, Ball& ball)
- {
-	 if(!isIntersecting(paddle, ball)) return;
 
-     ball.rect.y = -verticalVelocity;
-
-if(ball.rect.x < paddle.rect.x)
-ball.rect.x = -horizontalVelocity;
-else 
-ball.rect.x = horizontalVelocity;
- }
- */
 }  

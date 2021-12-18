@@ -2,7 +2,7 @@
 #define BALL_H
 #include "Component.h"
 #include "Paddle.h"
-
+#include "Bricks.h"
 #include <SDL.h>
 
 
@@ -26,10 +26,8 @@ public:
     void keyDown(const SDL_Event&);
     void mouseUp(const SDL_Event& eve);
     void startGame() { gameStarted = true; }
-    bool gameOver(){ return outOfBounds;}
-    
-    void collision(Paddle& paddel, Ball& ball);
-    
+    bool gameOver(){ return outOfBounds;}  
+    bool IntersectRect(const SDL_Rect & r1, const SDL_Rect & r2);
 protected:
 		Ball(int x, int y, int w, int h, Paddle* paddle);
 
@@ -44,6 +42,12 @@ private:
     int boundX = 800;
     int boundY = 600;
     Paddle* paddle;
+    Ball* ball;
+   
+  
+
+  
+    
 };
 }
 

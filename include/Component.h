@@ -22,7 +22,8 @@ namespace cwing {
 	    virtual void tick() = 0;
 		virtual bool gameOver(){return false;}
 		const SDL_Rect& getRect() const { return rect; }
-
+		virtual bool collisionCheck(const SDL_Event&) {return false;}
+		virtual void hit() {}
 	protected:
 		Component(int x, int y, int w, int h);
 		SDL_Rect rect;

@@ -5,7 +5,8 @@
 #include "Background.h"
 #include "Ball.h"
 #include "Bricks.h"
-
+#include "StartGame.h"
+#include "GameOver.h"
 
 
 // Alla dessa SDL inkluderingsfiler används inte i detta testprogram.
@@ -23,6 +24,15 @@ int main(int argc, char* argv[]) {
 
 
 	cwing::GameEngine ses;
+
+	
+//StartGame* s = StartGame::getInstance(0, 0, 800, 600);
+//	ses.add(s);
+
+        
+	
+	//if(s->startGame()){ 
+    // std::cout<<"Hej"<<std::endl;
 	Background* b = Background::getInstance(0, 0, 800, 600);
 	ses.add(b);
 	Paddle* p = Paddle::getInstance(330, 590, 100, 10);
@@ -38,10 +48,22 @@ int main(int argc, char* argv[]) {
         }
 	
     }
-	ses.run();
-
 	
+		//}
+		if(g->gameOver()){
+			GameOver* o = GameOver::getInstance(0, 0, 800, 600);
+			ses.add(o);
+		}
+		
 
+
+/*
+	    if (s->quitGame()){
+
+		}
+		*/
+
+          ses.run();      
 
      return 0;
-}
+		}

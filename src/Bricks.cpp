@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h> 
 #include <System.h>
+//#include <<SDL_image.h> 
 
 
 
@@ -15,19 +16,29 @@ namespace cwing{
             switch(randNum) {
                 case 1: 
                     bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block01.png");
+                    maxHealth = 1;
+                    currentHealth = 1;
                     break;
                 case 2:
                     bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block02.png");
+                    maxHealth = 1;
+                    currentHealth = 1;
                     break;
                 case 3:
                     bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block03.png");
+                    maxHealth = 2;
+                    currentHealth = 2;
                     break;
                 case 4:
                     bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block04.png");
+                    maxHealth = 3;
+                    currentHealth = 3;
                     break;
                 default:
                     bricks_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/block01.png");
-                    break;            
+                    maxHealth = 1;
+                    currentHealth = 1;
+                    break;     
             }
     }
 
@@ -37,6 +48,21 @@ Bricks* Bricks::getInstance(int x, int y, int w, int h)
 {
     return new Bricks(x, y, w, h);
 }
+
+void Bricks::hit()
+{
+    currentHealth--;
+    if (currentHealth == 0) 
+        isBrickHit = true;
+}
+
+/*
+void Bricks::tick()
+{
+    if (isBrickHit)
+        this->~Bricks();
+}
+*/
 
 Bricks::~Bricks()
 {

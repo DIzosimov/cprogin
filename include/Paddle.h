@@ -1,7 +1,6 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 #include "Component.h"
-
 #include <SDL.h>
 
 
