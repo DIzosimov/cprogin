@@ -1,7 +1,7 @@
 #include "GameOver.h"
 #include <SDL.h>
 #include <SDL_image.h> 
-#include <System.h>
+#include "GameWindow.h"
 
 
 
@@ -14,7 +14,7 @@ namespace cwing{
     {
 	
 
-    gameOver_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/GameOver.png");
+    gameOver_tex = IMG_LoadTexture(gw.get_ren(), "/Users/kamal/Documents/images/GameOver.png");
     
     }
 
@@ -35,8 +35,16 @@ SDL_DestroyTexture(gameOver_tex);
 void GameOver::draw() const
 {
 
-     //if(gameOver())
-   SDL_RenderCopy(sys.get_ren(), gameOver_tex, NULL, &getRect());
+     
+        SDL_RenderCopy(gw.get_ren(), gameOver_tex, NULL, &getRect());
+}
+
+
+void GameOver::tick() 
+{
+if(getEndGame()){
+    draw();
+}
 }
 
 }

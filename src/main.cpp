@@ -22,8 +22,15 @@ using namespace cwing;
 
 int main(int argc, char* argv[]) {
 
+	Background* background = Background::getInstance(0, 0, 800, 600);
+    Paddle* p = Paddle::getInstance(330, 590, 100, 10);
+	
+	Ball* ball = Ball::getInstance(0, 0, 13, 13, p);
 
-	cwing::GameEngine ses;
+		GameOver* o = GameOver::getInstance(0, 0, 800, 600);
+
+
+	cwing::GameEngine ses(p, ball, background, o);
 
 	
 //StartGame* s = StartGame::getInstance(0, 0, 800, 600);
@@ -35,25 +42,28 @@ int main(int argc, char* argv[]) {
     // std::cout<<"Hej"<<std::endl;
 	Background* b = Background::getInstance(0, 0, 800, 600);
 	ses.add(b);
-	Paddle* p = Paddle::getInstance(330, 590, 100, 10);
+	
 	ses.add(p);
-	Ball* g = Ball::getInstance(0, 0, 13, 13, p);
-	ses.add(g);
+	
+	ses.add(ball);
 	
 
 	for (int i = 1; i <= 18; i++) {
         for (int j = 1; j <= 10; j++) {
-            Bricks* t = Bricks::getInstance(i*40, j*20, 48, 20);
+            Bricks* t = Bricks::getInstance(i*40, j*20, 40, 20);
 				ses.add(t);
+				ses.addBricks(t);
         }
 	
     }
 	
 		//}
-		if(g->gameOver()){
-			GameOver* o = GameOver::getInstance(0, 0, 800, 600);
+		
+		if(o->getEndGame()){
+		
 			ses.add(o);
 		}
+		
 		
 
 

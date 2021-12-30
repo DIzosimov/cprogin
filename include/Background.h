@@ -4,24 +4,23 @@
 
 #include <SDL.h>
 
-
-namespace cwing{ 
-
-class Background : public Component 
+namespace cwing
 {
-public:
 
-    static Background* getInstance(int x, int y, int w, int h);
-    void draw() const;
-    void tick() {};
-    ~Background();
-protected:
-		Background(int x, int y, int w, int h);
+    class Background : public Component
+    {
+    public:
+        static Background *getInstance(int x, int y, int w, int h);
+        void draw() const;
+        void tick(){};
+        ~Background();
 
-private:
-    SDL_Texture* background_tex;
-    
-};
+    protected:
+        Background(int x, int y, int w, int h);
+
+    private:
+        SDL_Texture *background_tex;
+    };
 }
 
 #endif

@@ -2,8 +2,8 @@
 #define BALL_H
 #include "Component.h"
 #include "Paddle.h"
-#include "Bricks.h"
 #include <SDL.h>
+#include <Bricks.h>
 
 
 namespace cwing{ 
@@ -12,6 +12,7 @@ class Ball : public Component
 {
 public:
 
+   
     static Ball* getInstance(int x, int y, int w, int h, Paddle* paddle);
     void draw() const;
     void tick();
@@ -25,9 +26,12 @@ public:
     void mouseMotion(const SDL_Event& eve);
     void keyDown(const SDL_Event&);
     void mouseUp(const SDL_Event& eve);
-    void startGame() { gameStarted = true; }
+    bool startGame() { return gameStarted; }
     bool gameOver(){ return outOfBounds;}  
     bool IntersectRect(const SDL_Rect & r1, const SDL_Rect & r2);
+    int getOriginX(){return originX;}
+    int getOriginY(){return orginY;}
+    int getRadius(){return radius;}
 protected:
 		Ball(int x, int y, int w, int h, Paddle* paddle);
 
@@ -42,13 +46,16 @@ private:
     int boundX = 800;
     int boundY = 600;
     Paddle* paddle;
-    Ball* ball;
+   //Bricks* bricks;
+    int originX, orginY;
+    int radius;
    
   
 
   
     
 };
+//extern Ball ball;
 }
 
 #endif

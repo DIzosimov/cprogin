@@ -1,43 +1,33 @@
 #ifndef BRICKS_H
 #define BRICKS_H
-
 #include <SDL.h>
 #include <vector>
 #include <algorithm>
 #include <iostream>
 #include "Component.h"
 
-namespace cwing{ 
-
-class Bricks : public Component 
+namespace cwing
 {
-public:
-    static Bricks* getInstance(int x, int y, int w, int h);
-	//void InitializeBricks(int topSpacing);
-	//std::vector<Brick>* getBricks() { return &brickVector; };
-	static const int brickRows = 5;
-	static const int brickColumns = 9;
-    //bool isHit() { return isBrickHit; };
-    void hit();
-    void draw() const;
-    void tick(){}
-    //Brick();
-	//Brick( int verticalSpacing, int horizontalSpacing, int life );
-    ~Bricks();
-		int size() { return brickVector.size(); }
-		// std::vector<Bricks> getBricks() { return brickVector; }
-protected:
+
+	class Bricks : public Component
+	{
+	public:
+		static Bricks *getInstance(int x, int y, int w, int h);
+		void hit();
+		void draw() const;
+		void tick(){}
+		~Bricks();
+		bool getIsBrickHit() { return isBrickHit; }
+
+	protected:
 		Bricks(int x, int y, int w, int h);
 
-private:
-	std::vector<Bricks> brickVector;
-    SDL_Texture* bricks_tex ;
-	
-  bool isBrickHit = false;
-	//int brickWidth = 80;
-	//int brickHeight = 34;
-	int currentHealth;
-	int maxHealth;
-};
+	private:
+		SDL_Texture *bricks_tex;
+
+		bool isBrickHit = false;
+		int currentHealth;
+		int maxHealth;
+	};
 }
 #endif

@@ -1,7 +1,7 @@
 #include "StartGame.h"
 #include <SDL.h>
 #include <SDL_image.h> 
-#include <System.h>
+#include "GameWindow.h"
 
 
 
@@ -14,7 +14,7 @@ namespace cwing{
     {
 	
 
-    startGame_tex = IMG_LoadTexture(sys.get_ren(), "/Users/kamal/Documents/images/NewGame.png");
+    startGame_tex = IMG_LoadTexture(gw.get_ren(), "/Users/kamal/Documents/images/NewGame.png");
     
     }
 
@@ -36,7 +36,7 @@ void StartGame::draw() const
 {
 
      //if(isDown)
-   SDL_RenderCopy(sys.get_ren(), startGame_tex, NULL, &getRect());
+   SDL_RenderCopy(gw.get_ren(), startGame_tex, NULL, &getRect());
 }
 
 void StartGame::mouseDown(const SDL_Event& eve)

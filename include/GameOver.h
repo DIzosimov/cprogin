@@ -12,12 +12,13 @@ public:
 
     static GameOver* getInstance(int x, int y, int w, int h);
     void draw() const;
-    void tick(){}
+    void tick();
     ~GameOver();
+    //bool quitGame(){return }
    
    
     bool gameOver(){ return false;}
-    
+    bool getEndGame(){return endGame;} 
     
     
 protected:
@@ -25,6 +26,7 @@ protected:
 
 private:
     SDL_Texture* gameOver_tex;
+    bool endGame = false;
   
 };
 }
