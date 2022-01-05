@@ -1,30 +1,30 @@
-#ifndef BRICKS_H
-#define BRICKS_H
+#ifndef BRICK_H
+#define BRICK_H
 #include <SDL.h>
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include "Component.h"
+#include "Sprite.h"
 
 namespace cwing
 {
 
-	class Bricks : public Component
+	class Brick : public Sprite
 	{
 	public:
-		static Bricks *getInstance(int x, int y, int w, int h);
+		static Brick *getInstance(int x, int y, int w, int h);
 		void hit();
 		void draw() const;
-		void tick(){}
-		~Bricks();
+		void tick() {}
+		~Brick();
 		bool getIsBrickHit() { return isBrickHit; }
+		bool isOutOfBounds() const;
 
 	protected:
-		Bricks(int x, int y, int w, int h);
+		Brick(int x, int y, int w, int h);
 
 	private:
 		SDL_Texture *bricks_tex;
-
 		bool isBrickHit = false;
 		int currentHealth;
 		int maxHealth;

@@ -2,22 +2,21 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "GameWindow.h"
-#include <SDL_rect.h>
-#include <cmath>
 
 namespace cwing
+
 {
 
-	Ball::Ball(int x, int y, int w, int h, Paddle *paddle) : Component(x, y, w, h)
+	Ball::Ball(int x, int y, int w, int h, std::string bg, Paddle *paddle) : Sprite(x, y, w, h)
 	{
 		this->paddle = paddle;
 
-		ball_tex = IMG_LoadTexture(gw.get_ren(), "/Users/kamal/Documents/images/ball.png");
+		ball_tex = IMG_LoadTexture(gw.get_ren(), (Sprite::resPath + bg).c_str());
 	}
 
-	Ball *Ball::getInstance(int x, int y, int w, int h, Paddle *paddle)
+	Ball *Ball::getInstance(int x, int y, int w, int h, std::string bg, Paddle *paddle)
 	{
-		return new Ball(x, y, w, h, paddle);
+		return new Ball(x, y, w, h, bg, paddle);
 	}
 
 	Ball::~Ball()
@@ -25,9 +24,15 @@ namespace cwing
 		SDL_DestroyTexture(ball_tex);
 	}
 
+	bool Ball::isOutOfBounds() const
+	{
+		return Sprite::outOfBounds;
+	}
+
 	void Ball::draw() const
 	{
-		SDL_RenderCopy(gw.get_ren(), ball_tex, NULL, &getRect());
+		if (!isOutOfBounds())
+			SDL_RenderCopy(gw.get_ren(), ball_tex, NULL, &getRect());
 	}
 
 	void Ball::tick()
@@ -49,8 +54,7 @@ namespace cwing
 			}
 			if (rect.y >= 600)
 			{
-				outOfBounds = true;
-				gameOver();
+				Sprite::outOfBounds = true;
 			}
 		}
 		else

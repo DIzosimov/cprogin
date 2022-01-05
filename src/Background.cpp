@@ -6,15 +6,14 @@
 namespace cwing
 {
 
-    Background::Background(int x, int y, int w, int h) : Component(x, y, w, h)
+    Background::Background(int x, int y, int w, int h, std::string bg) : Sprite(x, y, w, h)
     {
-
-        background_tex = IMG_LoadTexture(gw.get_ren(), "/Users/kamal/Documents/images/background.jpg");
+        background_tex = IMG_LoadTexture(gw.get_ren(), (Sprite::resPath + bg).c_str());
     }
 
-    Background *Background::getInstance(int x, int y, int w, int h)
+    Background *Background::getInstance(int x, int y, int w, int h, std::string bg)
     {
-        return new Background(x, y, w, h);
+        return new Background(x, y, w, h, bg);
     }
 
     Background::~Background()
@@ -22,8 +21,14 @@ namespace cwing
         SDL_DestroyTexture(background_tex);
     }
 
+    bool Background::isOutOfBounds() const
+    {
+        return Sprite::outOfBounds;
+    }
+
     void Background::draw() const
     {
-        SDL_RenderCopy(gw.get_ren(), background_tex, NULL, &getRect());
+        if (!isOutOfBounds())
+            SDL_RenderCopy(gw.get_ren(), background_tex, NULL, &getRect());
     }
 }

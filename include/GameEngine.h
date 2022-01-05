@@ -1,13 +1,10 @@
 #ifndef GameEngine_H
 #define GameEngine_H
-
 #include <vector>
-#include "Component.h"
+#include "Sprite.h"
 #include <Ball.h>
 #include <Paddle.h>
-#include <Bricks.h>
-#include "Background.h"
-#include "GameOver.h"
+#include <Brick.h>
 
 namespace cwing
 {
@@ -15,22 +12,19 @@ namespace cwing
 	class GameEngine
 	{
 	public:
-		GameEngine(Paddle *paddle, Ball *ball, Background *background, GameOver *gameOver);
-		void add(Component *comp);
-		void remove(Component *comp);
+		GameEngine(Ball *ball, Paddle *paddle);
+		void add(Sprite *comp);
+		void remove(Sprite *comp);
 		void run();
-		void addBricks(Bricks *brick);
+		void addBricks(Brick *brick);
 		bool IntersectRect(const SDL_Rect &r1, const SDL_Rect &r2);
 
 	private:
-		std::vector<Component *> comps;
-		std::vector<Component *> added, removed;
-		std::vector<Bricks *> bricks;
-
+		std::vector<Sprite *> comps;
+		std::vector<Sprite *> added, removed;
+		std::vector<Brick *> bricks;
 		Ball *ball;
 		Paddle *paddle;
-		Background *background;
-		GameOver *gameOver;
 	};
 
 }

@@ -1,50 +1,36 @@
 #include "GameOver.h"
 #include <SDL.h>
-#include <SDL_image.h> 
+#include <SDL_image.h>
 #include "GameWindow.h"
 
+namespace cwing
+{
 
-
-
-
-
-namespace cwing{ 
- 
-    GameOver::GameOver(int x, int y, int w, int h):Component(x,y,w,h)
+    GameOver::GameOver(int x, int y, int w, int h, std::string bg) : Sprite(x, y, w, h)
     {
-	
 
-    gameOver_tex = IMG_LoadTexture(gw.get_ren(), "/Users/kamal/Documents/images/GameOver.png");
-    
+        gameOver_tex = IMG_LoadTexture(gw.get_ren(), (Sprite::resPath + bg).c_str());
     }
 
+    GameOver *GameOver::getInstance(int x, int y, int w, int h, std::string bg)
+    {
+        return new GameOver(x, y, w, h, bg);
+    }
 
+    GameOver::~GameOver()
+    {
+        SDL_DestroyTexture(gameOver_tex);
+    }
 
-GameOver* GameOver::getInstance(int x, int y, int w, int h)
-{
-    return new GameOver(x, y, w, h);
-}
+    bool GameOver::isOutOfBounds() const
+    {
+        return Sprite::outOfBounds;
+    }
 
-GameOver::~GameOver()
-{
-SDL_DestroyTexture(gameOver_tex);
-}
+    void GameOver::draw() const
+    {
 
-
-
-void GameOver::draw() const
-{
-
-     
-        SDL_RenderCopy(gw.get_ren(), gameOver_tex, NULL, &getRect());
-}
-
-
-void GameOver::tick() 
-{
-if(getEndGame()){
-    draw();
-}
-}
-
+        if (isOutOfBounds())
+            SDL_RenderCopy(gw.get_ren(), gameOver_tex, NULL, &getRect());
+    }
 }

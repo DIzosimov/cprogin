@@ -2,21 +2,19 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "GameWindow.h"
-#include <Component.h>
 #include <iostream>
-#include "Ball.h"
 
 namespace cwing
 {
 
-	Paddle::Paddle(int x, int y, int w, int h) : Component(x, y, w, h)
+	Paddle::Paddle(int x, int y, int w, int h, std::string bg) : Sprite(x, y, w, h)
 	{
-		paddle_tex = IMG_LoadTexture(gw.get_ren(), "/Users/kamal/Documents/images/paddle.png");
+		paddle_tex = IMG_LoadTexture(gw.get_ren(), (Sprite::resPath + bg).c_str());
 	}
 
-	Paddle *Paddle::getInstance(int x, int y, int w, int h)
+	Paddle *Paddle::getInstance(int x, int y, int w, int h, std::string bg)
 	{
-		return new Paddle(x, y, w, h);
+		return new Paddle(x, y, w, h, bg);
 	}
 
 	Paddle::~Paddle()
@@ -66,10 +64,14 @@ namespace cwing
 		}
 	}
 
-	void Paddle::draw() const
+	bool Paddle::isOutOfBounds() const
 	{
-
-		SDL_RenderCopy(gw.get_ren(), paddle_tex, NULL, &getRect());
+		return Sprite::outOfBounds;
 	}
 
+	void Paddle::draw() const
+	{
+		if (!isOutOfBounds())
+			SDL_RenderCopy(gw.get_ren(), paddle_tex, NULL, &getRect());
+	}
 }
